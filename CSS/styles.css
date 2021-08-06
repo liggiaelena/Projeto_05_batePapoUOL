@@ -1,3 +1,95 @@
 *{
     box-sizing: border-box;
 }
+@font-face {
+    font-family: "Roboto-Bold";
+    src: url(../fontes/Roboto-Bold.ttf);
+}
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url(../fontes/Roboto-Regular.ttf);
+}
+body{
+    background-color: #F3F3F3;
+}
+/*-------------TOPO------------------*/
+.topo{
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-left: 10vw;
+}
+.topo ion-icon{
+    font-size: 49px;
+    padding-right: 10vw;
+}
+img{
+    width: 75px;
+}
+
+/*-------------CORPO------------------*/
+.corpo{
+    margin: 100px 0px;
+} 
+.caixa{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    padding: 13px;
+    font-size: 14px;
+    font-family:"Roboto-Regular";
+    margin-bottom: 5px;
+}
+.cinza{
+    background-color: #AAAAAA;
+}
+.branco{
+    background-color: #FFFFFF;
+}
+.rosa{
+    background-color: #FFDEDE;
+}
+
+/*-------------FUNDO------------------*/
+.fundo{
+    background-color: #FFFFFF;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 5vw;
+
+}
+input{
+    border: none;
+    height: 30px;
+    font-family: "Roboto-Regular";
+    font-size: 18px;
+}
+input:focus{
+    outline: 0;
+}
+input::placeholder{
+    color: #000000;
+    font-size: 18px;
+    font-style: italic;
+
+}
+.fundo ion-icon{
+    font-size: 32px;
+    padding-right: 5vw;
+
+}
