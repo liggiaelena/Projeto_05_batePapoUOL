@@ -1,10 +1,10 @@
 
 
-
+let nome;
 //escolhaNome();
 iniciarSala();
 let menssagens="";
-let nome= "euuu";
+
 
 function escolhaNome() {
    nome = prompt("Por favor para se cadastrar digite seu nome:");
@@ -17,13 +17,13 @@ function verificarNome(){
 }
 
 function quandoErro(erro){
-    console.log(erro.response);
+    console.log(erro);
     if(erro.response.status === 400){
        nome = prompt("Esse nome já foi escolhido, por favor digite outro:");
        console.log(erro)
     }
 
-    verificarNome(nome);
+    verificarNome();
 }
 
 function iniciarSala(){
@@ -53,15 +53,15 @@ function construirMenssagem(menssagens,tipo,i){
          let texto = menssagens.data[i].text;
          let horario = menssagens.data[i].time;
     if (tipo === "status"){
-        menssagem += `<div class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong>${texto}</div>`    
+        menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}:</strong>${texto}</p>`    
     }
 
     if(tipo === "message"){
-        menssagem += `<div class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> para <strong>${paraQuem}</strong>: ${texto}</div>`  
+        menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> para <strong>${paraQuem}: </strong>${texto}</p>`  
     }
 
     if(tipo === "private_message"){
-        menssagem += `<div class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}</strong>: ${texto}</div>`    
+        menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}: </strong>${texto}</p>`    
     }
 }
 
@@ -76,7 +76,7 @@ function enviarMenssagem(){
     let seg = data.getSeconds(); 
     let horario = `(${hora}:${min}:${seg})`;
 
-    menssagem += `<div class="caixa message"><span class="horario">${horario}</span><strong>${nome}</strong> para <strong>Todos</strong>: ${textoInput}</div>`;
+    menssagem += `<p class="caixa message"><span class="horario">${horario}</span><strong>${nome}</strong> para <strong>Todos: </strong>${textoInput}</p>`;
 
     corpo.innerHTML = menssagem;
     corpo.lastChild.scrollIntoView();
