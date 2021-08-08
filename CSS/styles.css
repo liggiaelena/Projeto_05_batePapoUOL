@@ -48,14 +48,17 @@ img{
     font-family:"Roboto-Regular";
     margin-bottom: 5px;
 }
-.cinza{
-    background-color: #AAAAAA;
+.status{
+    background-color: #DCDCDC;
 }
-.branco{
+.message{
     background-color: #FFFFFF;
 }
-.rosa{
+.private_message{
     background-color: #FFDEDE;
+}
+.horario{
+    color: #AAAAAA;
 }
 
 /*-------------FUNDO------------------*/
