@@ -52,7 +52,7 @@ function construirMenssagem(menssagens,tipo,i){
          let texto = menssagens.data[i].text;
          let horario = menssagens.data[i].time;
     if (tipo === "status"){
-        menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}:</strong>${texto}</p>`    
+        menssagem += `<div class="caixa ${tipo}"><p class="horario">(${horario}) </p><strong>${deQuem}:</strong>${texto}</div>`    
     }
 
     if(tipo === "message"){
@@ -63,32 +63,17 @@ function construirMenssagem(menssagens,tipo,i){
         menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}: </strong>${texto}</p>`    
     }
 }
+
 function atualizarPaginaeStatus(){
     setInterval(iniciarSala, 3000);
     setInterval(usuarioOnline, 5000);
 }
 
 function usuarioOnline(){
-    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/status",{name:nome})
-    promise.then(function(){console.log("online")});
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/status",{name:nome})
+    
 }
 
-/*function enviarMenssagem(){
-    let textoInput = document.querySelector("input").value;
-    let corpo = document.querySelector(".corpo");
-    let menssagem = corpo.innerHTML;
-    let data = new Date();
-    let hora = data.getHours(); 
-    let min = data.getMinutes();        
-    let seg = data.getSeconds(); 
-    let horario = `(${hora}:${min}:${seg})`;
-
-    menssagem += `<div class="caixa message"><span class="horario">${horario}</span><strong>${nome}</strong> para <strong>Todos: </strong><p>${textoInput}</p></div>`;
-
-    corpo.innerHTML = menssagem;
-    corpo.lastChild.scrollIntoView();
-    textoInput = ""; 
-}*/
 function enviarMenssagem(){
     let textoInput = document.querySelector("input").value;
 
@@ -99,8 +84,13 @@ function enviarMenssagem(){
         type: "message"
     }
 
-    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages",minhaMenssagem);
+    const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages",minhaMenssagem);
 
-    iniciarSala();
-     
+    promisse.then(iniciarSala);
+    promisse.catch(usuarioOffline); 
+   
+}
+
+function usuarioOffline(){
+    window.location.reload();
 }
