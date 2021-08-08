@@ -1,17 +1,16 @@
 
 
 let nome;
-//escolhaNome();
-iniciarSala();
+escolhaNome();
+atualizarPaginaeStatus();
 let menssagens="";
-
 
 function escolhaNome() {
    nome = prompt("Por favor para se cadastrar digite seu nome:");
     verificarNome();
 }
 function verificarNome(){
-    let promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/participants',{nome});
+    let promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/participants',{name:nome});
     promise.then(iniciarSala);
     promise.catch(quandoErro);   
 }
@@ -44,7 +43,7 @@ function carregarMenssagens(menssagens){
 
      corpo.innerHTML = menssagem;
      corpo.lastChild.scrollIntoView();
-     
+
  }
 
 function construirMenssagem(menssagens,tipo,i){
@@ -64,9 +63,17 @@ function construirMenssagem(menssagens,tipo,i){
         menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}: </strong>${texto}</p>`    
     }
 }
+function atualizarPaginaeStatus(){
+    setInterval(iniciarSala, 3000);
+    setInterval(usuarioOnline, 5000);
+}
 
+function usuarioOnline(){
+    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/status",{name:nome})
+    promise.then(function(){console.log("online")});
+}
 
-function enviarMenssagem(){
+/*function enviarMenssagem(){
     let textoInput = document.querySelector("input").value;
     let corpo = document.querySelector(".corpo");
     let menssagem = corpo.innerHTML;
@@ -76,9 +83,24 @@ function enviarMenssagem(){
     let seg = data.getSeconds(); 
     let horario = `(${hora}:${min}:${seg})`;
 
-    menssagem += `<p class="caixa message"><span class="horario">${horario}</span><strong>${nome}</strong> para <strong>Todos: </strong>${textoInput}</p>`;
+    menssagem += `<div class="caixa message"><span class="horario">${horario}</span><strong>${nome}</strong> para <strong>Todos: </strong><p>${textoInput}</p></div>`;
 
     corpo.innerHTML = menssagem;
     corpo.lastChild.scrollIntoView();
     textoInput = ""; 
+}*/
+function enviarMenssagem(){
+    let textoInput = document.querySelector("input").value;
+
+    let minhaMenssagem = {
+        from: nome,
+        to: "Todos",
+        text: textoInput,
+        type: "message"
+    }
+
+    axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages",minhaMenssagem);
+
+    iniciarSala();
+     
 }
