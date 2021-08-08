@@ -101,3 +101,40 @@ input::placeholder{
     padding-right: 5vw;
 
 }
+
+/*-------------SIDEBAR------------------*/
+.transparente{
+    background-color: rgba(0, 0, 0,0.6);
+   /* position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 1;*/
+}
+.sidebar{
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 60vw;
+    position: fixed;
+    right: 0px;
+    top:0px;
+    z-index: 2;
+    font-family: "Roboto-Regular";
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.sidebar p{
+    font-weight: bold;
+    margin-top: 30px;
+}
+.sidebar ion-icon{
+   font-size: 28px;
+}
+.escondida{
+    display: none;
+    
+}

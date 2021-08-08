@@ -3,7 +3,8 @@
 let nome;
 escolhaNome();
 atualizarPaginaeStatus();
-let menssagens="";
+let mensagens="";
+let mensagem;
 
 function escolhaNome() {
    nome = prompt("Por favor para se cadastrar digite seu nome:");
@@ -16,7 +17,7 @@ function verificarNome(){
 }
 
 function quandoErro(erro){
-    console.log(erro);
+
     if(erro.response.status === 400){
        nome = prompt("Esse nome já foi escolhido, por favor digite outro:");
        console.log(erro)
@@ -28,39 +29,39 @@ function quandoErro(erro){
 function iniciarSala(){
     const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages");
     console.log("oi")
-    promise.then(carregarMenssagens);
+    promise.then(carregarMensagens);
     promise.catch(quandoErro);
 }
 
-function carregarMenssagens(menssagens){
+function carregarMensagens(mensagens){
     let corpo = document.querySelector(".corpo");
-     menssagem = corpo.innerHTML;
+     mensagem = corpo.innerHTML;
  
-     for(let i=0; i<menssagens.data.length; i++){
-         let tipo = menssagens.data[i].type;
-        construirMenssagem(menssagens,tipo,i); 
+     for(let i=0; i<mensagens.data.length; i++){
+         let tipo = mensagens.data[i].type;
+        construirMenssagem(mensagens,tipo,i); 
      }
 
-     corpo.innerHTML = menssagem;
+     corpo.innerHTML = mensagem;
      corpo.lastChild.scrollIntoView();
 
  }
 
-function construirMenssagem(menssagens,tipo,i){
-         let deQuem = menssagens.data[i].from;
-         let paraQuem = menssagens.data[i].to;
-         let texto = menssagens.data[i].text;
-         let horario = menssagens.data[i].time;
+function construirMenssagem(mensagens,tipo,i){
+         let deQuem = mensagens.data[i].from;
+         let paraQuem = mensagens.data[i].to;
+         let texto = mensagens.data[i].text;
+         let horario = mensagens.data[i].time;
     if (tipo === "status"){
-        menssagem += `<div class="caixa ${tipo}"><p class="horario">(${horario}) </p><strong>${deQuem}:</strong>${texto}</div>`    
+        mensagem += `<div class="caixa ${tipo}"><p class="horario">(${horario}) </p><strong>${deQuem}:</strong>${texto}</div>`    
     }
 
     if(tipo === "message"){
-        menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> para <strong>${paraQuem}: </strong>${texto}</p>`  
+        mensagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> para <strong>${paraQuem}: </strong>${texto}</p>`  
     }
 
     if(tipo === "private_message"){
-        menssagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}: </strong>${texto}</p>`    
+        mensagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}: </strong>${texto}</p>`    
     }
 }
 
@@ -88,9 +89,17 @@ function enviarMenssagem(){
 
     promisse.then(iniciarSala);
     promisse.catch(usuarioOffline); 
-   
+   // textoInput = ""; <--- nao ta funcionando
 }
 
 function usuarioOffline(){
     window.location.reload();
+}
+
+function abrirContatos(){
+    const container = document.querySelector(".sidebar");
+    console.log(container);
+    container.classList.remove("escondida");
+    
+
 }
