@@ -54,11 +54,11 @@ function construirMenssagem(mensagens,tipo,i){
          let texto = mensagens.data[i].text;
          let horario = mensagens.data[i].time;
     if (tipo === "status"){
-        mensagem += `<div class="caixa ${tipo}"><p class="horario">(${horario})&nbsp;</p><strong>${deQuem}</strong>:&nbsp;${texto}</div>`    
+        mensagem += `<div class="caixa ${tipo}"><p class="horario">(${horario})&nbsp;</p><strong>${deQuem}:</strong>&nbsp;${texto}</div>`    
     }
 
     if(tipo === "message"){
-        mensagem += `<p class="caixa ${tipo}"><span class="horario">&nbsp;(${horario})&nbsp;</span><strong>${deQuem}</strong>&nbsp;para&nbsp;<strong>${paraQuem}</strong>:&nbsp;${texto}</p>`  
+        mensagem += `<p class="caixa ${tipo}"><span class="horario">&nbsp;(${horario})&nbsp;</span><strong>${deQuem}</strong>&nbsp;para&nbsp;<strong>${paraQuem}:</strong>&nbsp;${texto}</p>`  
     }
 
     if(tipo === "private_message"){
@@ -166,10 +166,9 @@ function limparEscolhidos(pai){
     }
 }
  
-function menssagemPrivadaHtml(elemento);{
+function menssagemPrivadaHtml(elemento){
     let fundo = document.querySelector(".fundo");
     auxiliador = fundo.innerHTML;
     nomeEscolhido = elemento.querySelector("p").innerHTML;
-    console.log(nomeEscolhido);
 
 }
