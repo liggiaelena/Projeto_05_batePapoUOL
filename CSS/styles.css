@@ -105,12 +105,12 @@ input::placeholder{
 /*-------------SIDEBAR------------------*/
 .transparente{
     background-color: rgba(0, 0, 0,0.6);
-   /* position: fixed;
+    position: fixed;
     top: 0px;
     left: 0px;
     height: 100%;
     width: 100%;
-    z-index: 1;*/
+    z-index: 1;
 }
 .sidebar{
     background-color: #FFFFFF;
@@ -123,16 +123,41 @@ input::placeholder{
     font-family: "Roboto-Regular";
     font-size: 16px;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
 }
 .sidebar p{
     font-weight: bold;
     margin-top: 30px;
+    
+    width: 80%;
+}
+.sidebar div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 10px;
+    height: auto;
+}
+.tipo-mensagem{
+   height: 80px;
+}
+.sidebar span{
+    display: flex;
+    align-items: center;
+    width: auto;
+    justify-content: space-between;
+
 }
 .sidebar ion-icon{
    font-size: 28px;
+   padding: 3px 10px;
 }
 .escondida{
     display: none;

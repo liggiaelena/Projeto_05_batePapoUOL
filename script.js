@@ -5,6 +5,7 @@ escolhaNome();
 atualizarPaginaeStatus();
 let mensagens="";
 let mensagem;
+let listaParticipantes = [];
 
 function escolhaNome() {
    nome = prompt("Por favor para se cadastrar digite seu nome:");
@@ -28,7 +29,7 @@ function quandoErro(erro){
 
 function iniciarSala(){
     const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages");
-    console.log("oi")
+    
     promise.then(carregarMensagens);
     promise.catch(quandoErro);
 }
@@ -68,6 +69,7 @@ function construirMenssagem(mensagens,tipo,i){
 function atualizarPaginaeStatus(){
     setInterval(iniciarSala, 3000);
     setInterval(usuarioOnline, 5000);
+    setInterval(pegarListaParticipantes, 10000)
 }
 
 function usuarioOnline(){
@@ -89,17 +91,55 @@ function enviarMenssagem(){
 
     promisse.then(iniciarSala);
     promisse.catch(usuarioOffline); 
-   // textoInput = ""; <--- nao ta funcionando
+   
 }
 
 function usuarioOffline(){
     window.location.reload();
 }
 
-function abrirContatos(){
-    const container = document.querySelector(".sidebar");
-    console.log(container);
-    container.classList.remove("escondida");
-    
 
+function pegarListaParticipantes(){
+    const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/participants");
+
+    promise.then(quemEstaOn);
+}
+function quemEstaOn(lista){
+    for(let i=0; i<lista.data.length; i++){
+        listaParticipantes.push(lista.data[i].name);
+    }
+    gerarNomesHtml();
+}
+function gerarNomesHtml(){
+    let contatos = document.querySelector(".contatos");
+    let temporaria = document.querySelector(".temporaria");
+    if(temporaria !== null){
+        limparLista(contatos);
+        console.log("com contatos")
+    }
+    console.log("mudando os contatos")
+    let auxiliador = contatos.innerHTML ;
+
+    for(let i=0; i<listaParticipantes.length; i++){
+       auxiliador += `<span class="temporaria"><ion-icon name="person-circle"></ion-icon>${listaParticipantes[i]}</span>`
+    }
+    contatos.innerHTML = auxiliador;
+    auxiliador ="";
+}
+
+function limparLista(contatos){
+console.log("emtrei")
+    for(let i=0; i<listaParticipantes.length; i++){
+        console.log("entrei de vdd")
+        let temporaria = contatos.querySelector(".temporaria");
+        contatos.removeChild(temporaria); //Ta dando erro
+    }
+    listaParticipantes = [];
+}
+function abrirContatos(){
+    const sidebar = document.querySelector(".sidebar");
+    const vidro = document.querySelector(".vidro");
+    vidro.classList.toggle("transparente");
+    sidebar.classList.toggle("escondida");
+    
 }
