@@ -6,6 +6,7 @@ let nomeEscolhido;
 let mensagens="";
 let mensagem;
 let listaParticipantes = [];
+let escolhaMensagem = "";
 
 function escolhaNome() {
    nome = prompt("Por favor para se cadastrar digite seu nome:");
@@ -79,13 +80,17 @@ function usuarioOnline(){
 
 function enviarMenssagem(){
     let textoInput = document.querySelector("input").value;
-
     let minhaMenssagem = {
-        from: nome,
-        to: "Todos",
-        text: textoInput,
-        type: "message"
+            from: nome,
+            to: "Todos",
+            text: textoInput,
+            type: "message"
+        }
+    if(escolhaMensagem === "privada"){
+        minhaMenssagem.type = "private_message";
+        minhaMenssagem.to = nomeEscolhido;
     }
+    
 
     const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v3/uol/messages",minhaMenssagem);
 
@@ -192,6 +197,7 @@ function identificarEscolhidos(){
     let maneiraEscolhida = caixinha2.id;
     
     if(maneiraEscolhida === "reservado"){
+        escolhaMensagem = "privada";
         return true;
     }
     else{
