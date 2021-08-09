@@ -105,6 +105,7 @@ function pegarListaParticipantes(){
     promise.then(quemEstaOn);
 }
 function quemEstaOn(lista){
+    listaParticipantes = [];
     for(let i=0; i<lista.data.length; i++){
         listaParticipantes.push(lista.data[i].name);
     }
@@ -124,7 +125,7 @@ function gerarNomesHtml(){
     }
     contatos.innerHTML = auxiliador;
     auxiliador ="";
-    listaParticipantes = [];
+    alguemFoiEscolhido();
 }
 
 function limparHtml(contatos){
@@ -154,7 +155,7 @@ function escolhido(elemento){
     checkmark.classList.add("escolhido");
     checkmark.classList.remove("escondida");
 
-    menssagemPrivadaHtml(elemento);
+    menssagemPrivadaHtml();
 }
 
 function limparEscolhidos(pai){
@@ -166,9 +167,47 @@ function limparEscolhidos(pai){
     }
 }
  
-function menssagemPrivadaHtml(elemento){
-    let fundo = document.querySelector(".fundo");
-    auxiliador = fundo.innerHTML;
-    nomeEscolhido = elemento.querySelector("p").innerHTML;
+function menssagemPrivadaHtml(){
+    let maneiraEscolhida = identificarEscolhidos();
 
+    let fundo = document.querySelector(".fundo");
+    let auxiliador = `<div>
+            <input type="text" placeholder="Escreva aqui...">
+            <ion-icon name="paper-plane-outline" onclick="enviarMenssagem()"></ion-icon>
+          </div>`;
+
+        if(maneiraEscolhida){
+            auxiliador += `<div>Enviando para&nbsp;${nomeEscolhido}&nbsp;(reservadamente)</div>`;
+        }  
+    fundo.innerHTML = auxiliador;
+}
+
+function identificarEscolhidos(){
+    let contatos = document.querySelector(".contatos");
+    let caixinha1 = contatos.querySelector(".escolhido").parentNode;
+      nomeEscolhido = caixinha1.querySelector("p").innerHTML;
+
+    let tipoMensagem = document.querySelector(".tipo-mensagem");
+    let caixinha2 = tipoMensagem.querySelector(".escolhido").parentNode;
+    let maneiraEscolhida = caixinha2.id;
+    
+    if(maneiraEscolhida === "reservado"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function alguemFoiEscolhido(){
+    let contatos = document.querySelector(".contatos");
+    let marcado;
+    for(let i=0; i<listaParticipantes.length; i++){
+        if(nomeEscolhido === listaParticipantes[i]){
+            let caixinha = contatos.children[i+1];
+            marcado = caixinha.querySelector(".checkmark");
+        }
+    }
+        marcado.classList.add("escolhido");
+        marcado.classList.remove("escondida");
 }

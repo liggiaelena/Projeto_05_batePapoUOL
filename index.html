@@ -18,24 +18,27 @@
           
       </div>
       <div class="fundo">
-            <input type="text" placeholder="Escreva aqui...">
+        <div>
+          <input type="text" placeholder="Escreva aqui...">
           <ion-icon name="paper-plane-outline" onclick="enviarMenssagem()"></ion-icon>
+        </div>
+            
       </div>
       <div class="escondida sidebar">
         <h1>Escolha um contato para enviar mensagem</h1>
         <div class="contatos">
           <div class="caixinha" onclick="escolhido(this)">
             <span><ion-icon name="people"></ion-icon><p>Todos</p></span>
-            <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+            <ion-icon name="checkmark-outline" class="checkmark escolhido"></ion-icon>
           </div>
         </div>
           <h1>Escolha a visibilidade:</h1>
           <div class="tipo-mensagem">
-            <div class="caixinha" onclick="escolhido(this)">
+            <div class="caixinha" id="publico" onclick="escolhido(this)">
               <span><ion-icon name="lock-open"></ion-icon><p>Público</p></span>
-              <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+              <ion-icon name="checkmark-outline" class="checkmark escolhido"></ion-icon>
             </div>
-            <div class="caixinha" onclick="escolhido(this)">
+            <div class="caixinha" id="reservado" onclick="escolhido(this)">
               <span><ion-icon name="lock-closed"></ion-icon><p>Reservadamente</p></span>
               <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
             </div>
