@@ -24,13 +24,21 @@
       <div class="escondida sidebar">
         <p>Escolha um contato para enviar mensagem</p>
         <div class="contatos">
-          <span><ion-icon name="people"></ion-icon>Todos</span>
-          
+          <div class="caixinha" onclick="escolhido(this)">
+            <span><ion-icon name="people"></ion-icon><p>Todos</p></span>
+            <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+          </div>
         </div>
           <p>Escolha a visibilidade:</p>
           <div class="tipo-mensagem">
-          <span><ion-icon name="lock-open"></ion-icon>Público</span>
-          <span><ion-icon name="lock-closed"></ion-icon> Reservadamente</span>
+            <div class="caixinha" onclick="escolhido(this)">
+              <span><ion-icon name="lock-open"></ion-icon><p>Público</p></span>
+              <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+            </div>
+            <div class="caixinha" onclick="escolhido(this)">
+              <span><ion-icon name="lock-closed"></ion-icon><p>Reservadamente</p></span>
+              <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+            </div>
           </div>
         </div>
         

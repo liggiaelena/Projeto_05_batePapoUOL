@@ -34,6 +34,7 @@ body{
     font-size: 49px;
     padding-right: 10vw;
 }
+
 img{
     width: 75px;
 }
@@ -99,7 +100,6 @@ input::placeholder{
 .fundo ion-icon{
     font-size: 32px;
     padding-right: 5vw;
-
 }
 
 /*-------------SIDEBAR------------------*/
@@ -135,7 +135,7 @@ input::placeholder{
     
     width: 80%;
 }
-.sidebar div{
+.contatos,.tipo-mensagem{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -160,6 +160,16 @@ input::placeholder{
    padding: 3px 10px;
 }
 .escondida{
-    display: none;
-    
+    display: none;   
+}
+.caixinha{
+    display:flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+}
+.sidebar .checkmark{
+    font-size: 16px;
+    color: #28BB25;
+
 }

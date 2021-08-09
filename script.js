@@ -1,8 +1,8 @@
-
-
 let nome;
 escolhaNome();
+pegarListaParticipantes();
 atualizarPaginaeStatus();
+let nomeEscolhido;
 let mensagens="";
 let mensagem;
 let listaParticipantes = [];
@@ -54,15 +54,15 @@ function construirMenssagem(mensagens,tipo,i){
          let texto = mensagens.data[i].text;
          let horario = mensagens.data[i].time;
     if (tipo === "status"){
-        mensagem += `<div class="caixa ${tipo}"><p class="horario">(${horario}) </p><strong>${deQuem}:</strong>${texto}</div>`    
+        mensagem += `<div class="caixa ${tipo}"><p class="horario">(${horario})&nbsp;</p><strong>${deQuem}</strong>:&nbsp;${texto}</div>`    
     }
 
     if(tipo === "message"){
-        mensagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> para <strong>${paraQuem}: </strong>${texto}</p>`  
+        mensagem += `<p class="caixa ${tipo}"><span class="horario">&nbsp;(${horario})&nbsp;</span><strong>${deQuem}</strong>&nbsp;para&nbsp;<strong>${paraQuem}</strong>:&nbsp;${texto}</p>`  
     }
 
     if(tipo === "private_message"){
-        mensagem += `<p class="caixa ${tipo}"><span class="horario">(${horario})</span><strong>${deQuem}</strong> reservadamente para <strong>${paraQuem}: </strong>${texto}</p>`    
+        mensagem += `<p class="caixa ${tipo}"><span class="horario">&nbsp;(${horario})&nbsp;</span><strong>${deQuem}</strong>&nbsp;reservadamente para&nbsp;<strong>${paraQuem}:&nbsp;</strong>${texto}</p>`    
     }
 }
 
@@ -112,34 +112,64 @@ function quemEstaOn(lista){
 }
 function gerarNomesHtml(){
     let contatos = document.querySelector(".contatos");
-    let temporaria = document.querySelector(".temporaria");
-    if(temporaria !== null){
-        limparLista(contatos);
-        console.log("com contatos")
-    }
-    console.log("mudando os contatos")
+    limparHtml(contatos);
+
     let auxiliador = contatos.innerHTML ;
 
     for(let i=0; i<listaParticipantes.length; i++){
-       auxiliador += `<span class="temporaria"><ion-icon name="person-circle"></ion-icon>${listaParticipantes[i]}</span>`
+       auxiliador += `<div class="caixinha" onclick="escolhido(this)">
+       <span class="temporaria"><ion-icon name="person-circle"></ion-icon><p>${listaParticipantes[i]}</p></span>
+       <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+     </div>`
     }
     contatos.innerHTML = auxiliador;
     auxiliador ="";
-}
-
-function limparLista(contatos){
-console.log("emtrei")
-    for(let i=0; i<listaParticipantes.length; i++){
-        console.log("entrei de vdd")
-        let temporaria = contatos.querySelector(".temporaria");
-        contatos.removeChild(temporaria); //Ta dando erro
-    }
     listaParticipantes = [];
 }
+
+function limparHtml(contatos){
+    let temporaria = document.querySelector(".temporaria");
+    
+    if(temporaria !== null){
+        contatos.innerHTML = `<div class="caixinha" onclick="escolhido(this)">
+        <span><ion-icon name="people"></ion-icon><p>Todos</p></span>
+        <ion-icon name="checkmark-outline" class="checkmark escondida"></ion-icon>
+      </div>`;
+    }
+}
+
 function abrirContatos(){
     const sidebar = document.querySelector(".sidebar");
     const vidro = document.querySelector(".vidro");
     vidro.classList.toggle("transparente");
     sidebar.classList.toggle("escondida");
+}
+
+function escolhido(elemento){
     
+    let pai = elemento.parentNode;
+    limparEscolhidos(pai);
+
+    let checkmark = elemento.querySelector(".escondida")
+    checkmark.classList.add("escolhido");
+    checkmark.classList.remove("escondida");
+
+    menssagemPrivadaHtml(elemento);
+}
+
+function limparEscolhidos(pai){
+    let escolhido = pai.querySelector(".escolhido");
+   
+    if(escolhido !== null){
+        escolhido.classList.remove("escolhido");
+        escolhido.classList.add("escondida")
+    }
+}
+ 
+function menssagemPrivadaHtml(elemento);{
+    let fundo = document.querySelector(".fundo");
+    auxiliador = fundo.innerHTML;
+    nomeEscolhido = elemento.querySelector("p").innerHTML;
+    console.log(nomeEscolhido);
+
 }
